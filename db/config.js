@@ -6,11 +6,8 @@ dotenv.config();
 const { Pool } = pg;
 
 const pool = new Pool({
-    host: process.env.PG_HOST || "localhost",
-    port: process.env.PG_PORT ? Number(process.env.PG_PORT) : 5432,
-    user: process.env.PG_USER || "postgres",
-    password: process.env.PG_PASSWORD || "",
-    database: process.env.PG_DATABASE || "okoa_net_db",
+    connectionString: process.env.DATABASE_URL, // Use Render's database URL
+    ssl: { rejectUnauthorized: false },         // Required for Render Postgres
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
